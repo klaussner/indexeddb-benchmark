@@ -1,0 +1,40 @@
+<template name="dashboard">
+  <h1>IndexedDB benchmark</h1>
+
+  <form>
+    <label for="size">
+      Size (KiB):
+    </label>
+
+    <input id="size" name="size" type="number" value="1" />
+
+    <label for="count">
+      Documents:
+    </label>
+
+    <input id="count" name="count" type="number" value="100" />
+
+    <label for="reads">
+      Reads:
+    </label>
+
+    <input id="reads" name="reads" type="number" value="100" />
+
+    <div class="buttons">
+      <button data-benchmark="localforage">
+        Run (localForage)
+      </button>
+    </div>
+  </form>
+
+  <div class="results">
+    {{#each history}}
+      <strong>Read:</strong> {{round(read)}} ms
+      <strong>Write:</strong> {{round(write)}} ms
+
+      ({{count}} × {{size}} KiB, {{reads}} reads)
+
+      <br />
+    {{/each}}
+  </div>
+</template>
