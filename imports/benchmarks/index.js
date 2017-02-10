@@ -1,2 +1,3 @@
-export * from './localforage/benchmark.js';
-export * from './localstorage/benchmark.js';
+export * from './indexeddb';
+export * from './localforage';
+export * from './localstorage';

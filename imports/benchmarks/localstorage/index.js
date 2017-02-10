@@ -1,6 +1,6 @@
 import Benchmark from '../Benchmark.js'
 
-class LocalStorageBenchmark extends Benchmark {
+class LocalStorage extends Benchmark {
   clear() {
     localStorage.clear();
   }
@@ -18,4 +18,4 @@ class LocalStorageBenchmark extends Benchmark {
   }
 }
 
-export const localStorageBenchmark = new LocalStorageBenchmark;
+export const localStorageBenchmark = new LocalStorage;

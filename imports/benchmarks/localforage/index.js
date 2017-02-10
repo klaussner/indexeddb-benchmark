@@ -1,7 +1,7 @@
 import localForage from 'localforage';
 import Benchmark from '../Benchmark.js'
 
-class LocalForageBenchmark extends Benchmark {
+class LocalForage extends Benchmark {
   clear() {
     localForage.clear();
   }
@@ -19,4 +19,4 @@ class LocalForageBenchmark extends Benchmark {
   }
 }
 
-export const localForageBenchmark = new LocalForageBenchmark;
+export const localForageBenchmark = new LocalForage;

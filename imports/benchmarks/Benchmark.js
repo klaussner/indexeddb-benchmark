@@ -7,6 +7,7 @@ export default class Benchmark {
   generate(size, count, reads) {
     const data = [];
 
+    // Generate random documents
     for (let i = 0; i < count; i++) {
       const document = {
         id: chance.string({ length: 20 }),
@@ -16,6 +17,8 @@ export default class Benchmark {
       data.push(document);
     }
 
+    // Generate an array of length `reads` with the IDs generated above to
+    // simulate a random access pattern
     const ids = _.times(reads, () => {
       return data[_.random(0, count - 1)].id;
     });
@@ -23,6 +26,7 @@ export default class Benchmark {
     return { data, ids };
   }
 
+  // Measures the execution time of `f` in milliseconds
   async measure(f) {
     const start = performance.now();
     await f();
@@ -32,6 +36,8 @@ export default class Benchmark {
   async run({ size, count, reads }) {
     let write = 0, read;
     const { data, ids } = this.generate(size, count, reads);
+
+    this.setup && await this.setup();
 
     // Store documents
     this.clear();
