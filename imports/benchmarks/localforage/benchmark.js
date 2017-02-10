@@ -7,23 +7,15 @@ class LocalForageBenchmark extends Benchmark {
   }
 
   write(data) {
-    const promises = [];
-
-    for (let doc of data) {
-      promises.push(localForage.setItem(doc.id, doc.content));
-    }
-
-    return Promise.all(promises);
+    return Promise.all(data.map(doc => {
+      return localForage.setItem(doc.id, doc.content);
+    }));
   }
 
   read(ids) {
-    const promises = [];
-
-    for (let id of ids) {
-      promises.push(localForage.getItem(id));
-    }
-
-    return Promise.all(promises);
+    return Promise.all(ids.map(id => {
+      return localForage.getItem(id);
+    }));
   }
 }
 

@@ -6,15 +6,15 @@ class LocalStorageBenchmark extends Benchmark {
   }
 
   write(data) {
-    for (let doc of data) {
+    data.forEach(doc => {
       localStorage.setItem(doc.id, doc.content);
-    }
+    });
   }
 
   read(ids) {
-    for (let id of ids) {
+    ids.forEach(id => {
       localStorage.getItem(id);
-    }
+    });
   }
 }
 
