@@ -1,6 +1,11 @@
 <template name="dashboard">
   <h1>IndexedDB benchmark</h1>
 
+  <div class="warning">
+    <strong>Warning:</strong> The localStorage benchmark calls
+    <span class="code">localStorage.clear()</span>
+  </div>
+
   <form>
     <label for="size">
       Size (KiB):

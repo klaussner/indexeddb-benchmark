@@ -1,3 +1,11 @@
+.warning {
+  margin-bottom: 20px;
+}
+
+.warning .code {
+  font-family: monospace;
+}
+
 .buttons, .results {
   margin-top: 20px;
 }
