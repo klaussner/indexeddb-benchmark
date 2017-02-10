@@ -21,14 +21,20 @@
     <input id="reads" name="reads" type="number" value="100" />
 
     <div class="buttons">
-      <button data-benchmark="localforage">
+      <button data-benchmark="localForage">
         Run (localForage)
+      </button>
+
+      <button data-benchmark="localStorage">
+        Run (localStorage)
       </button>
     </div>
   </form>
 
   <div class="results">
     {{#each history}}
+      {{name}} –
+
       <strong>Read:</strong> {{round(read)}} ms
       <strong>Write:</strong> {{round(write)}} ms
 

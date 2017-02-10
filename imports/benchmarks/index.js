@@ -1,3 +1,2 @@
-import localforage from './localforage/benchmark.js';
-
-export default { localforage };
+export * from './localforage/benchmark.js';
+export * from './localstorage/benchmark.js';

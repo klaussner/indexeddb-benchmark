@@ -14,22 +14,25 @@ Template.dashboard.events({
   async 'click .buttons button'(event, template) {
     event.preventDefault();
 
-    const benchmark = benchmarks[event.target.dataset.benchmark];
-    const settings = template.$('form').serializeArray();
+    const name = event.target.dataset.benchmark;
+    const benchmark = benchmarks[name + 'Benchmark'];
 
-    const args = settings.reduce((prev, cur) => {
-      prev[cur.name] = parseInt(cur.value);
-      return prev;
-    }, {});
+    // Convert form data to { size, count, reads } object
+    const args = template.$('form')
+      .serializeArray()
+      .reduce((prev, cur) => {
+        prev[cur.name] = parseInt(cur.value);
+        return prev;
+      }, {});
 
     // Run benchmark
-    const result = await benchmark(args);
+    const result = await benchmark.run(args);
 
     // Add result and used settings to history
     const history = template.history.get();
 
     history.unshift({
-      size: args[0],
+      name,
       ...args,
       ...result
     });

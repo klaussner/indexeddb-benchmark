@@ -1,34 +1,30 @@
 import localForage from 'localforage';
-import random from 'lodash.random';
+import Benchmark from '../Benchmark.js'
 
-import generate from '/imports/data/generate.js';
-
-export default async function ({ size, count, reads }) {
-  let time, writeTime, readTime;
-  const data = generate(size, count);
-
-  // Store documents
-  localForage.clear();
-  time = performance.now();
-
-  for (let id in data) {
-    await localForage.setItem(id, data[id]);
+class LocalForageBenchmark extends Benchmark {
+  clear() {
+    localForage.clear();
   }
 
-  writeTime = performance.now() - time;
+  write(data) {
+    const promises = [];
 
-  // Retrieve documents
-  const ids = Object.keys(data);
-  time = performance.now();
+    for (let doc of data) {
+      promises.push(localForage.setItem(doc.id, doc.content));
+    }
 
-  for (let i = 0; i < reads; i++) {
-    await localForage.getItem(ids[random(0, count - 1)]);
+    return Promise.all(promises);
   }
 
-  readTime = performance.now() - time;
+  read(ids) {
+    const promises = [];
 
-  return {
-    write: writeTime / count,
-    read: readTime / reads
-  };
+    for (let id of ids) {
+      promises.push(localForage.getItem(id));
+    }
+
+    return Promise.all(promises);
+  }
 }
+
+export const localForageBenchmark = new LocalForageBenchmark;
