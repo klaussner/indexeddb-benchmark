@@ -34,7 +34,6 @@ export default class Benchmark {
   }
 
   async run({ size, count, reads }) {
-    let write = 0, read;
     const { data, ids } = this.generate(size, count, reads);
 
     this.setup && await this.setup();
@@ -42,12 +41,12 @@ export default class Benchmark {
     // Store documents
     this.clear();
 
-    write = await this.measure(async () => {
+    const write = await this.measure(async () => {
       await this.write(data);
     });
 
     // Retrieve documents
-    read = await this.measure(async () => {
+    const read = await this.measure(async () => {
       await this.read(ids);
     });
 

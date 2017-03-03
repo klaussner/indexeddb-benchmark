@@ -22,7 +22,8 @@ class IndexedDB extends Benchmark {
   getStore(write) {
     const tx = this.db.transaction([NAME], write
       ? 'readwrite'
-      : 'readonly');
+      : 'readonly'
+    );
 
     return tx.objectStore(NAME);
   }
