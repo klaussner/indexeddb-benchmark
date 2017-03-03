@@ -1,5 +1,5 @@
 import Chance from 'chance';
-import { _ } from 'lodash';
+import _ from 'lodash';
 
 const chance = new Chance;
 
